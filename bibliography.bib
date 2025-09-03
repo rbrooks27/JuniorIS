@@ -79,5 +79,22 @@ location = {Macao, P.R.China},
 series = {IJCAI '23},
 annote  = {This article presents a novel approach to constrained clustering using decision trees, aiming to enhance interpretability while adhering to user-defined constraints. The authors introduce a SAT-based framework that allows for the incorporation of domain-specific knowledge through constraints, improving clustering accuracy. The proposed method addresses the limitations of previous approaches by providing strong theoretical guarantees on solution quality and supporting clustering constraints. Experimental results demonstrate the effectiveness of the framework in producing high-quality and interpretable clustering solutions across various datasets. This work is particularly relevant for applications where interpretability is crucial, such as in healthcare and finance, and contributes to the broader field of explainable artificial intelligence (XAI). Given the focus on decision trees in the current Junior IS project exploring organic chemistry tools, this article offers important insights into creating models that are both effective and understandable. Moreover, the emphasis on constraints aligns with the need to incorporate chemical knowledge into the decision-making process.}
 }
+@inproceedings{10.1007/978-3-030-62522-1_35,
+author = {Reniers, Vincent and Van Landuyt, Dimitri and Rafique, Ansar and Joosen, Wouter},
+title = {A Workload-Driven Document Database Schema Recommender (DBSR)},
+year = {2020},
+isbn = {978-3-030-62521-4},
+publisher = {Springer-Verlag},
+address = {Berlin, Heidelberg},
+url = {https://doi.org/10.1007/978-3-030-62522-1_35},
+doi = {10.1007/978-3-030-62522-1_35},
+abstract = {Database schema design requires careful consideration of the application’s data model, workload, and target database technology to optimize for performance and data size. Traditional normalization schemes used in relational databases minimize data redundancy, whereas NoSQL document-oriented databases favor redundancy and optimize for horizontal scalability and performance.Systematic NoSQL schema design involves multiple dimensions, and a database designer is in practice required to carefully consider (i)&nbsp;which data elements to copy and co-locate, (ii)&nbsp;which data elements to normalize, and (iii)&nbsp;how to encode data, while taking into account factors such as the workload and data model.In this paper, we present a workload-driven document database schema recommender (DBSR), which takes a systematic, search-based approach in exploring the complex schema design space. The recommender takes as main inputs the application’s data model and its read workload, and outputs (i)&nbsp;the suggested document schema (featuring secondary indexing), (ii)&nbsp;query plan recommendations, and (iii)&nbsp;a document utility matrix that encodes insights on their respective costs and relative utility. We evaluate recommended schema in MongoDB using YCSB, and show significant benefits to read query performance.},
+booktitle = {Conceptual Modeling: 39th International Conference, ER 2020, Vienna, Austria, November 3–6, 2020, Proceedings},
+pages = {471–484},
+numpages = {14},
+keywords = {NoSQL database design, Document database schema recommender, NoSQL database cost models},
+location = {Vienna, Austria},
+annote  = {This article introduces a workload-driven document database schema recommender (DBSR) designed to optimize schema design for NoSQL document-oriented databases. The authors highlight the challenges of traditional normalization schemes used in relational databases, which minimize data redundancy, versus the redundancy-favoring approach of NoSQL databases that prioritize horizontal scalability and performance. The DBSR employs a systematic, search-based method to explore the complex schema design space, taking into account the application's data model and read workload. The recommender provides suggested document schemas, query plan recommendations, and a document utility matrix that evaluates costs and relative utility. Experimental evaluations using MongoDB and YCSB demonstrate significant improvements in read query performance. This work is particularly relevant for database designers seeking to optimize NoSQL schema design while balancing factors such as workload and data model. The article offers valuable insights into the systematic design of document databases, making it a useful resource for those involved in database management and optimization.}
+}
 
 
