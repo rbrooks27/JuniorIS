@@ -7,15 +7,32 @@
 \usepackage{setspace}
 \singlespace
 \usepackage[left=1in,right=1in,top=1in,bottom=1in]{geometry}
+\usepackage{graphicx}
 
-\title{\textbf{Project Topic}}
-\author{Your Name}
+\title{\textbf{Multistep Synthesis Tool for Organic Chemistry Education}}
+\author{Raelyn Brooks}
 
 \begin{document}
 
 \maketitle
+ 
+\indent 
+Organic chemistry has long been considered one of the most difficult undergraduate courses, with national failure rates often exceeding 50 percent. 
+Among the challenges faced by students, multistep synthesis stands out as a major stumbling block. Success in synthesis problems requires balancing starting materials, reagents, intermediates, conditions, and stereochemistry, all while reasoning backwards (retrosynthesis) and forwards (reaction progression). 
+Students often describe synthesis as a "black box": they know reactions individually, but cannot connect them into coherent strategies.
+The purpose of this project is to design and implement an interactive software system that teaches multistep synthesis through decision trees and constraint satisfaction techniques. By breaking synthesis into a sequence of guided yes/no decisions, the system will reinforce fundamentals and provide educational feedback at each step. 
+While professional chemistry tools exist—such as ChemDraw or Reaxys--these platforms are not designed for novice learners. This project fills the gap by prioritizing transparency, interpretability, and pedagogy over raw prediction power.
+\\
+\indent 
+A number of research directions inform this project. From a computer science perspective, foundational graph algorithms are necessary for representing molecules and reactions as nodes and edges \cite{clrsAlgorithms}. 
+This graph-based structure underpins most cheminformatics systems. On the theoretical side, Gale, Lobski, and Zanasi \cite{10.1016/j.tcs.2025.115084} propose a categorical model of organic chemistry, treating molecules as objects and reactions as morphisms. 
+Their framework offers a formal way of reasoning about transformations, which can guide the development of rule-based synthesis logic. Decision trees provide a natural mechanism for structuring synthesis pathways.O’Sullivan, Ferguson, and Freuder show how decision trees can boost the efficiency of constraint satisfaction problems (CSPs) by reducing the search space and pruning infeasible solutions. 
+\cite{10.1109/ICTAI.2004.38} Similarly, Shati, Cohen, and McIlraith demonstrate how decision trees can be combined with constraints to produce interpretable and accurate models. This is essential for an educational setting, where students must understand why a particular path works or fails. \cite{10.24963/ijcai.2023/225}
+\textit{Decision trees with short explainable rules} further emphasize explainability by introducing methods for building decision trees with short, clear rules, making them particularly well suited for teaching environments. \cite{10.1016/j.tcs.2025.115344}
+\\
+\indent
+Finally, the software must rest on an optimized data backbone. Reniers present schema recommender systems for document databases, which can be adapted to the chemical context. Their work highlights how workload-driven design improves query efficiency, an important consideration when storing and retrieving large numbers of molecules and reactions. \cite{10.1007/978-3-030-62522-1_35}
 
-In your proposal, you will provide justification on why your project matters based on work which has been done in this area, using in-line citations~\cite{clrsAlgorithms} to refer to existing works. Include what your project will accomplish and how your software will function. 
 
 
 \newpage
