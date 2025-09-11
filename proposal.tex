@@ -37,12 +37,22 @@ Finally, the software must rest on an optimized data backbone. Reniers present s
 
 \newpage
 \section*{Appendix}
-A concise list of features / user stories in the order in which they will be built. A few examples are below to demonstrate the expected scope and level of granularity; you will have more features than this.
+Planned features for the Multistep Synthesis Tool for Organic Chemistry include:
 \begin{itemize}
-	\item Default picture display on web application.
-	\item On a button-click, user can separate the image into foreground and background.
-	\item User can select a picture from their desktop.
-	\item Selected picture displays on the web application.
+	\item Load dataset of organic molecules and reactions. (Existing dataset with names, structures, reactions, and reaction conditions.)
+	\item Input molecule by name or drawing. (Name of a starting material or target molecule and convert it into a structured chemical format.)
+	\item Confirm and display input molecules. (Show the user the structure of the input molecule to confirm correctness.)
+	\item Search function for molecules. (Add a search feature that lets users find molecules, reagents, or intermediates within the dataset for use in pathway.)
+	\item Generate single-step transformations. (Build logic to propose valid one-step transformations from the starting material toward the target product.)
+	\item Generate multistep synthesis pathways. (Use decision trees and constraint satisfaction to create multistep synthesis routes from starting material to target product.)
+	\item Step-by-step walkthrough mode with explanations. (Create an interactive mode where the user can walk through each reaction step with explanations of the reagents, conditions, and reasoning.)
+	\item Constraint enforcement on pathways. (Implement rule checks that block or flag invalid or chemically impossible steps, with clear error explanations.)
+	
+	\title{\textbf{Stretch Goals:}}
+	\item Instructor problem mode (create custom synthesis problems for students to solve)
+	\item Integrate cheminformatics library (e.g., RDKit) for advanced molecule handling and visualization
+	\item User accounts and progress tracking (save synthesis attempts and scores over time)
+	\item Machine learning suggestion layer (use ML models to suggest likely reagents or pathways based on historical data)
 \end{itemize}
 
 
