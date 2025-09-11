@@ -14,3 +14,6 @@ A brief description.
 | [Input molecule by name or drawing](https://github.com/rbrooks27/JuniorIS/issues/4) | 0/0/00 | |
 | [Confirm and display input molecules](https://github.com/rbrooks27/JuniorIS/issues/5) | 0/0/00 | |
 | [Search function for molecules](https://github.com/rbrooks27/JuniorIS/issues/6) | 0/0/00 | |
+| [Generate single-step transformations](https://github.com/rbrooks27/JuniorIS/issues/7) | 0/0/00 | |
+| [Constraint enforcement on pathways.](https://github.com/rbrooks27/JuniorIS/issues/8) | 0/0/00 | |
+| [Generate multistep synthesis pathways](https://github.com/rbrooks27/JuniorIS/issues/9) | 0/0/00 | |
