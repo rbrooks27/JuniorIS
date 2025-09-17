@@ -19,3 +19,4 @@ A brief description.
 | [Generate multistep synthesis pathways](https://github.com/rbrooks27/JuniorIS/issues/9) | 0/0/00 | |
 | [User interface for interaction](https://github.com/rbrooks27/JuniorIS/issues/10) | 0/0/00 | |
 | [Step-by-step walkthrough mode with explanations](https://github.com/rbrooks27/JuniorIS/issues/11) | 0/0/00 | |
+| [Test on actual synthesis problems](https://github.com/rbrooks27/JuniorIS/issues/12) | 0/0/00 | |
