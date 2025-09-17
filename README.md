@@ -17,3 +17,5 @@ A brief description.
 | [Generate single-step transformations](https://github.com/rbrooks27/JuniorIS/issues/7) | 0/0/00 | |
 | [Constraint enforcement on pathways.](https://github.com/rbrooks27/JuniorIS/issues/8) | 0/0/00 | |
 | [Generate multistep synthesis pathways](https://github.com/rbrooks27/JuniorIS/issues/9) | 0/0/00 | |
+| [User interface for interaction](https://github.com/rbrooks27/JuniorIS/issues/10) | 0/0/00 | |
+| [Step-by-step walkthrough mode with explanations](https://github.com/rbrooks27/JuniorIS/issues/11) | 0/0/00 | |
