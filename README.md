@@ -1,5 +1,6 @@
-# Your Project Title Here
-A brief description.
+# OrgoNizer - (Multistep Synthesis Organic Chemistry)
+The purpose of this project is to design and implement an interactive software system that teaches multistep synthesis through decision trees and constraint satisfaction techniques. By breaking synthesis into a sequence of guided yes/no decisions, the system will reinforce fundamentals and provide educational feedback at each step. 
+While professional chemistry tools exist—such as ChemDraw or Reaxys--these platforms are not designed for novice learners. This project fills the gap by prioritizing transparency, interpretability, and pedagogy over raw prediction power.
 
 
 ## Feature Calendar
