@@ -1,0 +1,7 @@
+- RDKIT Version 2022.09.5 
+- Python version 3.10.18
+- Conda environment used: rdkit-env
+- Required packages: rdkit, pillow
+- Conda install command: conda install -c conda-forge rdkit=2022.09.5
+- Activate environment command: conda activate rdkit-env
+- Deactivate environment command: conda deactivate
