@@ -279,4 +279,4 @@ TSWLatexianTemp*
 # Custom local additions
 src/__pycache__/
 Miniconda3.sh
-#src/dataset/reactionSmilesFigShare2024.txt
+src/dataset/reactionSmilesFigShare2024.txt
