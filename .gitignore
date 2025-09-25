@@ -275,3 +275,7 @@ TSWLatexianTemp*
 
 # Makeindex log files
 *.lpz
+
+# Custom local additions
+src/__pycache__/
+Miniconda3.sh
