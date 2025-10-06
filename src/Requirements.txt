@@ -1,7 +1,14 @@
-- RDKIT Version 2022.09.5 
-- Python version 3.10.18
-- Conda environment used: rdkit-env
-- Required packages: rdkit, pillow
-- Conda install command: conda install -c conda-forge rdkit=2022.09.5
-- Activate environment command: conda activate rdkit-env
-- Deactivate environment command: conda deactivate
+# Project Requirements and Setup Instructions
+
+#Just in case, python version 3.10.18 is recommended for RDKit compatibility.
+pip install python==3.10.18
+
+# 1. Create and activate conda environment with Python 3.10.18
+conda create -n rdkit-env python=3.10.18
+conda activate rdkit-env
+
+# 2. Install required packages
+conda install -c conda-forge rdkit=2022.09.5 pillow
+
+# 3. (Optional) Deactivate environment when done
+# conda deactivate
