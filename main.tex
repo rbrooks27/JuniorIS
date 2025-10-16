@@ -37,6 +37,60 @@ Within this context, RDKit serves as a key enabling tool, offering molecule pars
 The purpose of this review is to situate this project’s methodology—an RDKit-based multistep pathway visualization tool—within the broader landscape of chemical data representation, machine-assisted reaction modeling, and visualization frameworks.
 \\
 
+\section{Background}
+\indent
+In organic chemistry, multistep synthesis refers to the process of transforming simple molecular starting materials into complex target molecules through a series of discrete, logically ordered chemical reactions.
+Each reaction step modifies the structure of a molecule, typically by altering functional groups—specific arrangements of atoms that dictate chemical behavior.
+From a computer science perspective, these functional groups can be viewed as data types or states: just as an integer might be cast into a string or an array into a list, a hydroxyl group (–OH) might be converted into a halide (–Cl), or an alkene might be transformed into an alcohol. 
+Each synthetic step is thus a state transition in a well-defined, though highly constrained, chemical state machine.
+\\
+\indent
+Designing a synthetic pathway is not unlike algorithm design, where chemists aim to find an efficient and feasible sequence of operations to reach a target state.
+Here, the “output” is a desired molecule, and the “input” is a set of commercially available or easily accessible starting materials. 
+The multistep aspect arises because direct, one-step conversions are rarely possible; instead, chemists must plan a sequence of reactions, each altering the molecular structure in a controlled manner.
+This is analogous to chaining multiple functions in a program to transform an initial data structure into a final desired format.
+\\
+\indent
+A central algorithmic strategy in synthesis planning is retrosynthesis, introduced by E.J. Corey, organic chemist and 1990 Chemistry Nobel Prize Winner.
+Retrosynthesis involves working backward from the target molecule to break it down recursively into simpler precursors.
+This is strikingly similar to goal decomposition in AI planning or backtracking algorithms in search problems.
+Starting from the target, chemists iteratively identify strategic bonds to “disconnect,” yielding simpler molecules that could plausibly be converted into the target in one step.
+This continues until reaching molecules that are known or easily obtainable starting materials.
+In computational terms, retrosynthesis resembles a reverse search through a tree or graph, where each node represents a molecular state and each edge represents a known chemical transformation.
+\\
+\indent
+During synthesis planning, selectivity and functional group compatibility act as constraints, analogous to conditional logic in code or constraint satisfaction problems (CSPs) in AI.
+For example, a reaction designed to modify an alcohol group might also inadvertently react with a nearby amine group, producing unwanted side products.
+Chemists must therefore choose reaction sequences that respect these constraints, ensuring that each transformation occurs at the correct site and does not disrupt other parts of the molecule.
+This is akin to managing function side effects in programming—ensuring that an operation modifies only what it is intended to, without corrupting unrelated data.
+\\
+\indent
+An additional layer of complexity involves stereochemistry (the 3D arrangement of atoms) and protecting groups (temporary modifications used to “mask” reactive sites).
+These elements function like temporary state variables or conditional flags that preserve critical information during intermediate steps.
+For example, protecting groups are akin to placing certain variables in a “read-only” or “inactive” state to prevent unwanted changes until the program reaches the correct point in execution to “unprotect” them.
+Stereochemical relationships act like metadata that must be preserved across transformations, ensuring that the final molecule has the correct 3D orientation—just as a compiler must preserve type information across optimizations.
+\\
+\indent
+To manage these complex transformations systematically, chemists often model reactions in a linear data flow format:
+\\
+\begin{center}
+{Reactants $+$ Reagents $\rightarrow$ Products}
+\end{center}
+\indent
+This format mirrors data flow in functional programming or pipeline architectures in software engineering.
+Each step is a transformation function that takes molecular “inputs” and produces “outputs,” which can then feed into the next step.
+From a computational perspective, this linear structure offers several advantages:
+\begin{enumerate}
+    \item \textbf{Traceability:} Each transformation can be logged and indexed, enabling the reconstruction of synthetic routes and error checking, similar to how logs are used in debugging.
+    \item \textbf{Database Integration:} Standardized formats like SMILES and SMIRKS allow reactions to be stored as structured data, facilitating search, retrieval, and machine learning. This mirrors how normalized database schemas support efficient querying.
+    \item \textbf{Modularity:} Each reaction step is a modular operation that can be reused across different pathways, analogous to reusable functions or classes in code.
+    \item \textbf{Visualization:} Linear reaction flows can be easily represented as directed acyclic graphs (DAGs), where nodes are molecular states and edges are transformations—making them ideal for cheminformatics pipelines and algorithmic reasoning.
+\end{enumerate}
+\indent
+In short, multistep synthesis can be understood as a sophisticated algorithmic problem: molecules represent structured data, functional groups represent types and states, reactions are transformation functions, and retrosynthesis is a backward search strategy under complex constraints.
+For computer scientists, this framing highlights why cheminformatics libraries like RDKit, symbolic languages like SMIRKS, and visualization pipelines are powerful—they translate the chemical logic into computational structures that can be analyzed, optimized, and taught using algorithmic principles.
+\\
+
     
 \section{Related Works}
 \subsection{Reaction Representation and SMIRKS Formalism}
