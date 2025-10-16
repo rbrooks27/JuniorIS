@@ -8,17 +8,78 @@
 \singlespace
 \usepackage[left=1in,right=1in,top=1in,bottom=1in]{geometry}
 
-\title{\textbf{Project Topic}}
-\author{Your Name}
+\title{\textbf{Multistep Synthesis Tool for Organic Chemistry Education}}
+\author{Raelyn Brooks}
 
 \begin{document}
 
 \maketitle
 
 \section{Introduction}
-The introduction will broadly introduce your topic, motivate it, and describe what will be done.
+\indent
+The automation and visualization of organic synthesis pathways have become critical in both educational and research contexts within computational chemistry.
+Traditional reaction depiction methods, while effective for static textbook examples, often fail to convey the complexity of multistep synthetic logic and reagent interactions.
+This project addresses that gap by implementing a visualization pipeline using SMIRKS-based reaction representations and the RDKit cheminformatics library.
+The core objective is to generate interpretable and data-driven visual representations of chemical transformations, making synthetic pathways more accessible for analysis, teaching, and algorithmic reasoning.
+\\
+\indent
+Organic chemistry specifically has long been considered one of the most difficult undergraduate courses, with national failure rates often exceeding 50 percent. 
+Among the challenges faced by students, is multistep synthesis complexity standing out as a major stumbling block. 
+Success in synthesis problems requires balancing starting materials, reagents, intermediates, conditions, and stereochemistry, all while reasoning backwards (retrosynthesis) and forwards (reaction progression). 
+Students often describe synthesis as a "black box": they know reactions individually, but cannot connect them into coherent strategies.
+This project aims to design and implement an interactive software system that teaches multistep synthesis through decision trees and constraint satisfaction techniques. 
+By breaking synthesis into a sequence of guided yes/no decisions, the system will reinforce fundamentals and provide educational feedback at each step. 
+\\
+\indent
+The literature reflects a growing interest in translating chemical reaction data into computationally interpretable formats. 
+Previous studies have leveraged symbolic representations like SMILES (Simplified Molecular Input Line Entry System) and its generalized form, SMIRKS, to encode reactions and reaction rules. 
+Within this context, RDKit serves as a key enabling tool, offering molecule parsing, coordinate computation, and visualization capabilities that underpin many modern cheminformatics pipelines. 
+The purpose of this review is to situate this project’s methodology—an RDKit-based multistep pathway visualization tool—within the broader landscape of chemical data representation, machine-assisted reaction modeling, and visualization frameworks.
+\\
 
+    
 \section{Related Works}
+\subsection{Reaction Representation and SMIRKS Formalism}
+\indent
+The foundational step in computational reaction modeling is the translation of chemical transformations into a symbolic language interpretable by algorithms.
+The SMIRKS format, derived from SMILES, provides a flexible mechanism to encode both specific reactions and generalized transformation rules.
+Literature on chemical data representation emphasizes that these formats enable reaction pattern recognition, rule-based synthesis prediction, and large-scale database integration.
+Works in this domain highlight that robust SMIRKS parsing supports not only mechanistic modeling but also serves as a data layer for visualization systems and generative synthesis algorithms~\cite{10.1002/ail2.91}.
+\\
+\indent
+Works in this domain highlight that robust SMIRKS parsing supports not only mechanistic modeling but also serves as a data layer for visualization systems and generative synthesis algorithms.
+The annotated literature identifies several efforts to standardize chemical notation and link structural encoding with reaction prediction models, a crucial link to the project’s educational synthesis visualization goals.
+\subsection{RDKit and Cheminformatics Frameworks}
+\indent
+Among open-source cheminformatics platforms, RDKit is one of the most widely adopted due to its robust handling of molecular representations and transformations. 
+Numerous studies in cheminformatics emphasize RDKit’s versatility for tasks including substructure searching, molecular fingerprinting, and reaction enumeration.
+Researchers have particularly noted its extensibility for educational and visualization purposes, allowing developers to generate 2D molecular depictions, reaction schemes, and datasets for computational learning systems.
+\\
+\indent
+In this project, RDKit’s molecule parsing (MolFromSmiles) and coordinate generation (Compute2DCoords) functions serve as the computational backbone for converting textual reaction definitions into visual chemical diagrams.
+By leveraging RDKit’s drawing modules (Draw.MolToImage), the project extends the toolkit into a visual pedagogy tool—making chemical synthesis pathways interpretable even for non-specialist learners.
+This positions the work within a subfield of cheminformatics focused on interpretable visual analytics, bridging chemical informatics and visual communication.
+\\
+\subsection{Computational Visualization and Educational Tools}
+\indent
+The use of visualization in computational chemistry extends beyond aesthetics; it plays a vital cognitive role in supporting chemical reasoning.
+Prior work on reaction visualization tools—ranging from commercial platforms like ChemDraw to research-oriented frameworks like Indigo and Open Babel—demonstrates how symbolic chemistry can be rendered graphically to assist comprehension and verification.
+However, many of these systems rely on manual input or lack automated support for multi-step reaction sequences.
+\\
+\indent
+By contrast, the system developed in this project automates pathway rendering from large reaction datasets. 
+Each reaction, formatted as Reactants $\rightarrow$ Reagents $\rightarrow$ Products, is parsed and visually represented as a network of chemical structures connected by arrows annotated with reagent labels.
+This approach aligns with modern pedagogical chemistry tools that emphasize interactivity and visual logic to improve understanding of synthesis design.
+The use of PIL (Python Imaging Library) to dynamically compose RDKit-rendered molecules onto a unified canvas represents a practical integration of informatics and visual communication principles highlighted in the literature.
+\\
+\subsection{Data-Driven Synthesis Prediction and Multistep Modeling}
+\indent
+Recent studies in reaction prediction, retrosynthesis, and synthesis planning have leveraged large datasets encoded in SMILES/SMIRKS to train machine learning models capable of generating plausible synthetic routes~\cite{dai2019retrosynthesis}.
+Although this project does not directly implement predictive modeling, it shares methodological continuity with such research by structuring reactions in a format compatible with machine learning frameworks~\cite{hormazabal2022cede}.
+Literature examining data-driven synthesis design emphasizes that visualization and explainability remain key challenges; thus, tools that render reaction logic interpretable, like this project’s visualization pipeline, contribute to advancing both human understanding and computational transparency in chemistry.
+\\
+\indent
+Moreover, by including thousands of curated textbook and large-scale reactions, the dataset architecture supports potential future expansion into reaction pathway decision trees or knowledge graph representations, which several annotated studies identify as emerging directions in cheminformatics research~\cite{10.1016/j.tcs.2025.115344}.
 
 \section{Methodology}
 Dijkstra's algorithm was chosen for single-source shortest path computation on graphs with non-negative edge weights, following the implementation presented in CLRS~\cite{clrsAlgorithms}.
