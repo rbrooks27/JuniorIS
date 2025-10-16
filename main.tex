@@ -17,25 +17,32 @@
 
 \section{Introduction}
 \indent
-The automation and visualization of organic synthesis pathways have become critical in both educational and research contexts within computational chemistry.
-Traditional reaction depiction methods, while effective for static textbook examples, often fail to convey the complexity of multistep synthetic logic and reagent interactions.
-This project addresses that gap by implementing a visualization pipeline using SMIRKS-based reaction representations and the RDKit cheminformatics library.
-The core objective is to generate interpretable and data-driven visual representations of chemical transformations, making synthetic pathways more accessible for analysis, teaching, and algorithmic reasoning.
+Organic synthesis—the design of reaction sequences to build complex molecules from simpler precursors—remains one of the most intellectually demanding areas of chemistry.
+Unlike single-step reactions that can be memorized and applied in isolation, multistep synthesis requires strategic planning, backward reasoning, and the coordination of many interacting chemical transformations.
+For students, this often feels like solving a “black box” puzzle: they understand individual reactions but struggle to combine them into coherent pathways.
+National failure rates for organic chemistry courses frequently exceed 50 percent, underscoring the widespread difficulty of mastering this skill.
 \\
 \indent
-Organic chemistry specifically has long been considered one of the most difficult undergraduate courses, with national failure rates often exceeding 50 percent. 
-Among the challenges faced by students, is multistep synthesis complexity standing out as a major stumbling block. 
-Success in synthesis problems requires balancing starting materials, reagents, intermediates, conditions, and stereochemistry, all while reasoning backwards (retrosynthesis) and forwards (reaction progression). 
-Students often describe synthesis as a "black box": they know reactions individually, but cannot connect them into coherent strategies.
-This project aims to design and implement an interactive software system that teaches multistep synthesis through decision trees and constraint satisfaction techniques. 
-By breaking synthesis into a sequence of guided yes/no decisions, the system will reinforce fundamentals and provide educational feedback at each step. 
+n both research and education, the traditional static depiction of reactions in textbooks fails to reflect the underlying algorithmic logic of multistep synthesis.
+Designing a synthetic route involves recursive problem solving (retrosynthesis), constraint management (functional group compatibility and selectivity), and temporary state control (protecting groups and stereochemistry)—all of which resemble computational planning problems.
+However, existing instructional tools rarely make this algorithmic structure explicit, limiting learners’ ability to see synthesis as a structured, rule-driven process.
 \\
 \indent
-The literature reflects a growing interest in translating chemical reaction data into computationally interpretable formats. 
-Previous studies have leveraged symbolic representations like SMILES (Simplified Molecular Input Line Entry System) and its generalized form, SMIRKS, to encode reactions and reaction rules. 
-Within this context, RDKit serves as a key enabling tool, offering molecule parsing, coordinate computation, and visualization capabilities that underpin many modern cheminformatics pipelines. 
-The purpose of this review is to situate this project’s methodology—an RDKit-based multistep pathway visualization tool—within the broader landscape of chemical data representation, machine-assisted reaction modeling, and visualization frameworks.
+This project addresses that gap by developing an interactive visualization pipeline that encodes reactions using the SMIRKS formalism and renders them using the RDKit cheminformatics library.
+SMIRKS provides a symbolic language for reaction rules, enabling computational parsing, pattern recognition, and database integration.
+RDKit then transforms these symbolic definitions into visual molecular diagrams, allowing entire multistep pathways to be represented as connected, interpretable reaction networks.
 \\
+\indent
+By leveraging these technologies, the project contributes to educational cheminformatics through a tool that:
+\begin{enumerate}
+    \item Automates the rendering of multistep synthesis pathways from reaction datasets.
+    \item isualizes reaction logic in a way that emphasizes decision trees and constraint satisfaction, mirroring algorithmic reasoning.
+    \item Bridges chemical and computational representations, making synthesis more accessible for both chemists and computer scientists.
+\end{enumerate}
+\indent
+Ultimately, this work positions multistep synthesis not just as a chemical skill but as a computationally tractable process, paving the way for more effective teaching tools, database-driven synthesis planning, and algorithmic analysis in organic chemistry.
+\\
+
 
 \section{Background}
 \indent
