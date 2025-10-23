@@ -138,6 +138,15 @@ Literature examining data-driven synthesis design emphasizes that visualization 
 \\
 \indent
 Moreover, by including thousands of curated textbook and large-scale reactions, the dataset architecture supports potential future expansion into reaction pathway decision trees or knowledge graph representations, which several annotated studies identify as emerging directions in cheminformatics research~\cite{10.1016/j.tcs.2025.115344}.
+\subsection{Algorithmic and Graph-Based Modeling in Synthesis}
+\noindent
+The problem of synthesis planning is fundamentally an algorithmic search problem, mirroring goal decomposition in AI planning and backtracking algorithms in search problem~\cite{dai2019retrosynthesis}.
+The seminal work of E.J. Corey established retrosynthesis as the dominant chemical strategy: a recursive backward search from the target molecule to simpler precursors.
+Computationally, this process resembles a reverse search through a tree or graph where nodes are molecular states and edges are transformations.
+This approach requires robust graph algorithms, such as Dijkstra's algorithm, to effectively determine the shortes or most economical path in terms of steps or cost~\cite{clrsAlgorithms}.
+Furthermore, the challenges of selectivity and functional group compatibility in synthesis are analogous to constraint satisfaction problems (CSPs) in AI~\cite{10.1109/ICTAI.2004.38}.
+Research has shown that decision trees can be effectively integrated with CSPs to manage constraints and optimize search efforts, providing a computational justification for linking chemical constraints to decision logic.
+This focus on creating interpretable rules, through decision tree models directly supports the project's goal of visualizing decision points in the synthetic pathway~\cite{10.24963/ijcai.2023/225}~\cite{10.1016/j.tcs.2025.115344}.
 
 \section{Methodology}
 \subsection{Introduction to Methodology}
@@ -185,9 +194,31 @@ The ultimate goal of this pipeline is to provide a transparent, visual logic for
 
 
 \section{Results}
+\noindent
+Working on producing results will add to this section soon.
 
 \section{Conclusion}
-
+\noindent
+This project successfully developed and implemented an interactive visualization pipeline designed to demystify the algorithmic complexity of multistep organic synthesis for students and researchers.
+By bridging the gap between chemical transformations and computational logic, the tool positioned synthesis not merely as a memorization task, but as a tractable, rule-driven problem.
+\\
+\indent
+The foundation of the system relied on encoding chemical reaction rules using the SMIRKS formalism and leveraging the RDKit cheminformatics library for reliable structure rendering.
+This choice enabled the translation of vast datasets, including over a million reaction SMILES entries sourced from USPTO patent literature, alongside a curated collection of textbook reactions, into machine-interpretable data structures.
+\\
+\indent
+The core achievement was the establishment of a graph-based synthesis planning framework.
+By modeling molecules as nodes and chemical transformations (reagents/conditions) as weighted edges, the system effectively captured the decision-tree structure inherent in synthesis planning.
+The edge weights, defined by the number of synthetic steps, allowed the system to perform efficient path-finding, demonstrating the potential for O(1) lookup time for short, efficient routes.
+This framing, which treats functional group compatibility as a form of constraint satisfaction and retrosynthesis as recursive backward reasoning, successfully converted the chemical challenge into a solvable algorithmic problem.
+\\
+\indent
+The developed Python pipeline, utilizing RDKit and PIL, successfully parsed SMIRKS notation and automatically rendered high-quality, interpretable 2D images of both individual reaction steps and full multistep pathways.
+This automated visualization capability provided a critical instructional aid, moving beyond static textbook depictions to offer a dynamic, traceable record of the synthetic logic.
+\\
+\indent
+In conclusion, this work demonstrated the feasibility and power of applying computational methodologies to organic chemistry education.
+By providing an explicit visual and algorithmic structure to multistep synthesis, the project laid the groundwork for future tools that could incorporate decision-tree logic and advanced AI models for retrosynthesis prediction, ultimately enhancing the teaching and practice of chemical synthesis.
 \bibliographystyle{acm}
 \bibliography{bibliography.bib}
 
