@@ -86,21 +86,16 @@ To manage these complex transformations systematically, chemists often model rea
 This format mirrors data flow in functional programming or pipeline architectures in software engineering.
 Each step is a transformation function that takes molecular “inputs” and produces “outputs,” which can then feed into the next step.
 From a computational perspective, this linear structure offers several advantages:
-{\sloppy
 \begin{enumerate}
     \item \textbf{Traceability:} Each transformation can be logged and indexed, enabling the reconstruction of synthetic routes and error checking, similar to how logs are used in debugging.
     \item \textbf{Database Integration:} Standardized formats like SMILES and SMIRKS allow reactions to be stored as structured data, facilitating search, retrieval, and machine learning. This mirrors how normalized database schemas support efficient querying.
     \item \textbf{Modularity:} Each reaction step is a modular operation that can be reused across different pathways, analogous to reusable functions or classes in code.
     \item \textbf{Visualization:} Linear reaction flows can be easily represented as directed acyclic graphs (DAGs), where nodes are molecular states and edges are transformations—making them ideal for cheminformatics pipelines and algorithmic reasoning.
 \end{enumerate}
-}
-\\
-\indent
+
 In short, multistep synthesis can be understood as a sophisticated algorithmic problem: molecules represent structured data, functional groups represent types and states, reactions are transformation functions, and retrosynthesis is a backward search strategy under complex constraints.
 For computer scientists, this framing highlights why cheminformatics libraries like RDKit, symbolic languages like SMIRKS, and visualization pipelines are powerful—they translate the chemical logic into computational structures that can be analyzed, optimized, and taught using algorithmic principles.
-\\
 
-    
 \section{Related Works}
 \subsection{Reaction Representation and SMIRKS Formalism}
 \indent
@@ -123,8 +118,8 @@ By leveraging RDKit’s drawing modules (Draw.MolToImage), the project extends t
 This positions the work within a subfield of cheminformatics focused on interpretable visual analytics, bridging chemical informatics and visual communication.
 \\
 \subsection{Computational Visualization and Educational Tools}
-\\
-\indent
+
+\noindent
 The use of visualization in computational chemistry extends beyond aesthetics; it plays a vital cognitive role in supporting chemical reasoning.
 Prior work on reaction visualization tools—ranging from commercial platforms like ChemDraw to research-oriented frameworks like Indigo and Open Babel—demonstrates how symbolic chemistry can be rendered graphically to assist comprehension and verification.
 However, many of these systems rely on manual input or lack automated support for multi-step reaction sequences.
@@ -178,13 +173,11 @@ The entire system was built using Python, leveraging key libraries for cheminfor
 The development environment was maintained using Anaconda to ensure seamless integration with the RDKit environment~\cite{rdkit2025overview}.
 \\
 The pipeline comprises two main operational scripts and a structured data organization system:
-{\sloppy{
 \begin{enumerate}
-    \item \textbf{multistepTemplate.py:} This core script is responsible for the actual rendering. It parses the SMIRKS notation by first splitting the reaction components using $">"$ and then individual molecules using $"."$. It uses the RDKit library for its robust handling of molecular representations and transformations,specifically for interpreting SMIRKS notation and generating 2D molecular diagrams.
-    \item \textbf{generateFromDataset.py:} This script manages data access. It reads reaction SMILES and SMIRKS from the curated dataset folder, allowing for adjustable processing limits. It incorporates the tqdm library to provide runtime tracking and progress indication, crucial for managing the large data volume.
+    \item \textbf{multistepTemplate:} This core script is responsible for the actual rendering. It parses the SMIRKS notation by first splitting the reaction components using $">"$ and then individual molecules using $"."$. It uses the RDKit library for its robust handling of molecular representations and transformations,specifically for interpreting SMIRKS notation and generating 2D molecular diagrams.
+    \item \textbf{generateFromDataset:} This script manages data access. It reads reaction SMILES and SMIRKS from the curated dataset folder, allowing for adjustable processing limits.
+    \item \textbf{Progress Tracking:} It incorporates the tqdm library to provide runtime tracking and progress indication, crucial for managing the large data volume.
 \end{enumerate}
-}
-}
 The RDKit output (molecular structure images) is then composed using the Python Imaging Library (PIL) to create a unified canvas that displays the reaction scheme in the familiar reaction format.
 All generated images (products, reactants, reactions, and complete multisteps) are stored in organized folders, facilitating rapid retrival for the interactive step-by-step user interface, which is designed with an input structure similar to RMechDB.
 The ultimate goal of this pipeline is to provide a transparent, visual logic for chemical processes, advancing cheminformatics through interpretable visual analytics.
