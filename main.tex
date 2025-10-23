@@ -20,7 +20,7 @@
 Organic synthesis—the design of reaction sequences to build complex molecules from simpler precursors—remains one of the most intellectually demanding areas of chemistry.
 Unlike single-step reactions that can be memorized and applied in isolation, multistep synthesis requires strategic planning, backward reasoning, and the coordination of many interacting chemical transformations.
 For students, this often feels like solving a “black box” puzzle: they understand individual reactions but struggle to combine them into coherent pathways.
-National failure rates for organic chemistry courses frequently exceed 50 percent, underscoring the widespread difficulty of mastering this skill.
+National failure rates for organic chemistry courses frequently exceed 50 percent~\cite{mooring2016flipped}, underscoring the widespread difficulty of mastering this skill.
 \\
 \indent
 In both research and education, the traditional static depiction of reactions in textbooks fails to reflect the underlying algorithmic logic of multistep synthesis.
@@ -28,8 +28,8 @@ Designing a synthetic route involves recursive problem solving (retrosynthesis),
 However, existing instructional tools rarely make this algorithmic structure explicit, limiting learners’ ability to see synthesis as a structured, rule-driven process.
 \\
 \indent
-This project addresses that gap by developing an interactive visualization pipeline that encodes reactions using the SMIRKS formalism and renders them using the RDKit cheminformatics library.
-SMIRKS provides a symbolic language for reaction rules, enabling computational parsing, pattern recognition, and database integration.
+This project addresses that gap by developing an interactive visualization pipeline that encodes reactions using the Smiles Reaction Knowledge Specification (SMIRKS) formalism and renders them using the RDKit cheminformatics library.
+SMIRKS provides a symbolic language for reaction rules, enabling computational parsing, pattern recognition, and database integration. This is based on Smiles Arbitrary Target Specification(SMARTS) notation, which encodes molecular structures as linear strings—facilitating algorithmic manipulation.
 RDKit then transforms these symbolic definitions into visual molecular diagrams, allowing entire multistep pathways to be represented as connected, interpretable reaction networks.
 \\
 \indent
@@ -66,7 +66,7 @@ This continues until reaching molecules that are known or easily obtainable star
 In computational terms, retrosynthesis resembles a reverse search through a tree or graph, where each node represents a molecular state and each edge represents a known chemical transformation.
 \\
 \indent
-During synthesis planning, selectivity and functional group compatibility act as constraints, analogous to conditional logic in code or constraint satisfaction problems (CSPs) in AI.
+During synthesis planning, selectivity and functional group compatibility act as constraints, analogous to conditional logic in code or constraint satisfaction problems (CSPs) in AI.~\cite{10.1109/ICTAI.2004.38}
 For example, a reaction designed to modify an alcohol group might also inadvertently react with a nearby amine group, producing unwanted side products.
 Chemists must therefore choose reaction sequences that respect these constraints, ensuring that each transformation occurs at the correct site and does not disrupt other parts of the molecule.
 This is akin to managing function side effects in programming—ensuring that an operation modifies only what it is intended to, without corrupting unrelated data.
@@ -87,12 +87,15 @@ To manage these complex transformations systematically, chemists often model rea
 This format mirrors data flow in functional programming or pipeline architectures in software engineering.
 Each step is a transformation function that takes molecular “inputs” and produces “outputs,” which can then feed into the next step.
 From a computational perspective, this linear structure offers several advantages:
+{\sloppy
 \begin{enumerate}
     \item \textbf{Traceability:} Each transformation can be logged and indexed, enabling the reconstruction of synthetic routes and error checking, similar to how logs are used in debugging.
     \item \textbf{Database Integration:} Standardized formats like SMILES and SMIRKS allow reactions to be stored as structured data, facilitating search, retrieval, and machine learning. This mirrors how normalized database schemas support efficient querying.
     \item \textbf{Modularity:} Each reaction step is a modular operation that can be reused across different pathways, analogous to reusable functions or classes in code.
     \item \textbf{Visualization:} Linear reaction flows can be easily represented as directed acyclic graphs (DAGs), where nodes are molecular states and edges are transformations—making them ideal for cheminformatics pipelines and algorithmic reasoning.
 \end{enumerate}
+}
+\\
 \indent
 In short, multistep synthesis can be understood as a sophisticated algorithmic problem: molecules represent structured data, functional groups represent types and states, reactions are transformation functions, and retrosynthesis is a backward search strategy under complex constraints.
 For computer scientists, this framing highlights why cheminformatics libraries like RDKit, symbolic languages like SMIRKS, and visualization pipelines are powerful—they translate the chemical logic into computational structures that can be analyzed, optimized, and taught using algorithmic principles.
@@ -116,12 +119,12 @@ Among open-source cheminformatics platforms, RDKit is one of the most widely ado
 Numerous studies in cheminformatics emphasize RDKit’s versatility for tasks including substructure searching, molecular fingerprinting, and reaction enumeration.
 Researchers have particularly noted its extensibility for educational and visualization purposes, allowing developers to generate 2D molecular depictions, reaction schemes, and datasets for computational learning systems.
 \\
-\indent
 In this project, RDKit’s molecule parsing (MolFromSmiles) and coordinate generation (Compute2DCoords) functions serve as the computational backbone for converting textual reaction definitions into visual chemical diagrams.
 By leveraging RDKit’s drawing modules (Draw.MolToImage), the project extends the toolkit into a visual pedagogy tool—making chemical synthesis pathways interpretable even for non-specialist learners.
 This positions the work within a subfield of cheminformatics focused on interpretable visual analytics, bridging chemical informatics and visual communication.
 \\
 \subsection{Computational Visualization and Educational Tools}
+\\
 \indent
 The use of visualization in computational chemistry extends beyond aesthetics; it plays a vital cognitive role in supporting chemical reasoning.
 Prior work on reaction visualization tools—ranging from commercial platforms like ChemDraw to research-oriented frameworks like Indigo and Open Babel—demonstrates how symbolic chemistry can be rendered graphically to assist comprehension and verification.
@@ -143,7 +146,51 @@ Literature examining data-driven synthesis design emphasizes that visualization 
 Moreover, by including thousands of curated textbook and large-scale reactions, the dataset architecture supports potential future expansion into reaction pathway decision trees or knowledge graph representations, which several annotated studies identify as emerging directions in cheminformatics research~\cite{10.1016/j.tcs.2025.115344}.
 
 \section{Methodology}
-Dijkstra's algorithm was chosen for single-source shortest path computation on graphs with non-negative edge weights, following the implementation presented in CLRS~\cite{clrsAlgorithms}.
+\subsection{Introduction to Methodology}
+The design and implementation of the Multistep Synthesis Tool were guided by a core objective: to translate the complex, constraint-driven logic of organic synthesis into a computationally tractable and visually intuitive format.
+This section details the data architecture, the graph-based framework for synthesis planning, and the cheminformatics visualization pipeline developed to achieve this goal.
+\subsection{Data Acquisition and Structural Formatting}
+The foundation of the system is a comprehensive dataset of chemical transformations.
+The primary data source is a large SMILES dataset compiled by Rik van der Lingen, which encompasses 1.37 million reaction SMILES entries~\cite{vanderlingen2025reaction}.
+These entries, which include reactants, reagents, solvents, and products, were sourced predominantly from United States Patent and Trademark Office USPTO patent literature spanning from 1976 to 2024, with an additional 2.5 percent from academic literature.
+This extensive dataset was generated through custom parsing and conversion from an existing USPTO dataset, employing OSCAR for semantic parsing and ChatGPT LLM-based extraction for data extraction.
+Molecular entity identification was achieved using OPSIN and a custom synonym list.
+All SMILES strings were verified to be RDKit-safe, and duplicates were removed to ensure data integrity.
+\\
+To complement this large-scale data, a custom collection of textbook organic chemistry reactions was curated and formatted explicitly in the SMIRKS notation.
+The SMIRKS format is crucial for encoding chemical transformation rules, utilizing the convention: {Reactants $\rightarrow$ Reagents $\rightarrow$ Products}.
+Within this structure, the "$>$" symbol separates the reaction components, while the "$.$" symbol is used to separate individual molecules within a component list.
+This symbolic language enables the computational system to parse reaction logic, a necessary step for the visualization pipeline and future expansion into prediction models.
+
+\subsection{Algorithmic Architecture for Synthesis Planning}
+The synthesis problem—finding a pathway from a starting material to a target molecule—was framed as a graph search problem in an effort to model the decision-tree logic inherent in chemical planning~\cite{10.1016/j.tcs.2025.115084}.
+While the system's eventual goal aligns with a retrosynthesis approach, the forward synthesis pathway is initially constructed as a directed graph.
+\begin{enumerate}
+    \item \textbf{Nodes:} Represent every molecules (compound) involved in the multistep synthesis scheme, including the initial starting material, all intermediate compounds, and the final target product.
+    \item \textbf{Edges:} Represent the application of reagents and/or reaction conditions that transform a molecule (Node A) into a subsequent molecule (Node B)
+    \item \textbf{Edge Weights:} The primary edge weight is the number of synthetic steps. Assigning a unit weight to each successful transformation allows the system, when fully implemented, to leverage algorithms like Dijkstra's algorithm to identify the shortest, or most efficient, patyway in terms of step count~\cite{clrsAlgorithms}.
+\end{enumerate}
+A key component of this architecture is the Tree Structure Implementation~\cite{10.1109/ICTAI.2004.38}.
+This structure uses nodes for molecules and edges for reagents/reaction conditions,effectively creating a binary decision framework (reagent present/absent).
+This design facilitates a highly efficient search, enabling an O(1) search time when the tree data is properly stored and queried.
+Once the target molecule is successfully reached through this forward search, the algorithm traverses backward (retrosynthetically) to construct and retrieve the complete pathway for the user.
+\subsection{Cheminformatics Visualization Pipeline}
+The entire system was built using Python, leveraging key libraries for cheminformatics and image generation.
+The development environment was maintained using Anaconda to ensure seamless integration with the RDKit environment~\cite{rdkit2025overview}.
+\\
+The pipeline comprises two main operational scripts and a structured data organization system:
+{\sloppy{
+\begin{enumerate}
+    \item \textbf{multistepTemplate.py:} This core script is responsible for the actual rendering. It parses the SMIRKS notation by first splitting the reaction components using $">"$ and then individual molecules using $"."$. It uses the RDKit library for its robust handling of molecular representations and transformations,specifically for interpreting SMIRKS notation and generating 2D molecular diagrams.
+    \item \textbf{generateFromDataset.py:} This script manages data access. It reads reaction SMILES and SMIRKS from the curated dataset folder, allowing for adjustable processing limits. It incorporates the tqdm library to provide runtime tracking and progress indication, crucial for managing the large data volume.
+\end{enumerate}
+}
+}
+The RDKit output (molecular structure images) is then composed using the Python Imaging Library (PIL) to create a unified canvas that displays the reaction scheme in the familiar reaction format.
+All generated images (products, reactants, reactions, and complete multisteps) are stored in organized folders, facilitating rapid retrival for the interactive step-by-step user interface, which is designed with an input structure similar to RMechDB.
+The ultimate goal of this pipeline is to provide a transparent, visual logic for chemical processes, advancing cheminformatics through interpretable visual analytics.
+
+
 
 \section{Results}
 
