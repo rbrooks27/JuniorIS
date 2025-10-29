@@ -1,0 +1,10 @@
+CC=O > [O] > CC(=O)O
+CC=O > [H-] > CCO
+CC=O > O > C(CO)O
+CC=O.CN > [H+] > C=NC
+CC=O.N=O > [H+] > C=NO
+CC=O.C#N > [H+] > C(C#N)O
+CC=O.OCCO > [H+] > C(OCCO)O
+CC=O.S > [H+] > C(S)S
+CC=O.CC=O > [OH-] > C(CO)C=O
+CC=O.CP(C1CCCCC1)=C > [H+] > C=C
