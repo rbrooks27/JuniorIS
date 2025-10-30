@@ -7,4 +7,5 @@ CC=O.C#N > [H+] > C(C#N)O
 CC=O.OCCO > [H+] > C(OCCO)O
 CC=O.S > [H+] > C(S)S
 CC=O.CC=O > [OH-] > C(CO)C=O
+CCO>H2SO4>C=C;C=C>mCPBA>OCC;OCC>HBr>BrCC;BrCC>AgOAc>OCC
 CC=O.CP(C1CCCCC1)=C > [H+] > C=C
