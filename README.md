@@ -8,10 +8,10 @@ While professional chemistry tools exist—such as ChemDraw or Reaxys--these pla
 | **Issue** | **Due date** | |
 | --------- | ------------ | -- |
 | []() | 0/0/00 | |
-| [Example issue description with link](https://github.com/hmm34/example-annotated-bibliography/issues/1) | 9/1/25 | |
-| [Find Dataset for Organic Molecule based on Attributes needed](https://github.com/rbrooks27/JuniorIS/issues/1) | 9/19/25 | |
-| [Building database to store all molecules and reactions (if needed)](https://github.com/hmm34/example-annotated-bibliography/issues/1) | 9/19/25 | |
-| [Develop Decision Tree Logic](https://github.com/rbrooks27/JuniorIS/issues/3) | 9/27/25 | |
+| [Example issue description with link](https://github.com/hmm34/example-annotated-bibliography/issues/1) | 9/1/25 |Completed|
+| [Find Dataset for Organic Molecule based on Attributes needed](https://github.com/rbrooks27/JuniorIS/issues/1) | 9/19/25 |Completed|
+| [Building database to store all molecules and reactions (if needed)](https://github.com/hmm34/example-annotated-bibliography/issues/1) | 9/19/25 |Was Not Need|
+| [Develop Decision Tree Logic](https://github.com/rbrooks27/JuniorIS/issues/3) | 11/1/25 | Currently On|
 | [Input molecule by name or drawing](https://github.com/rbrooks27/JuniorIS/issues/4) | 0/0/00 | |
 | [Confirm and display input molecules](https://github.com/rbrooks27/JuniorIS/issues/5) | 0/0/00 | |
 | [Search function for molecules](https://github.com/rbrooks27/JuniorIS/issues/6) | 0/0/00 | |
