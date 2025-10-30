@@ -16,8 +16,8 @@ While professional chemistry tools exist—such as ChemDraw or Reaxys--these pla
 | [Confirm and display input molecules](https://github.com/rbrooks27/JuniorIS/issues/5) | 0/0/00 | |
 | [Search function for molecules](https://github.com/rbrooks27/JuniorIS/issues/6) | 0/0/00 | |
 | [Generate single-step transformations](https://github.com/rbrooks27/JuniorIS/issues/7) | 0/0/00 | |
-| [Constraint enforcement on pathways.](https://github.com/rbrooks27/JuniorIS/issues/8) | 0/0/00 |Currently On|
+| [Constraint enforcement on pathways.](https://github.com/rbrooks27/JuniorIS/issues/8) | 11/1/25|Currently On|
 | [Generate multistep synthesis pathways](https://github.com/rbrooks27/JuniorIS/issues/9) | 0/0/00 | |
 | [User interface for interaction](https://github.com/rbrooks27/JuniorIS/issues/10) | 0/0/00 | |
 | [Step-by-step walkthrough mode with explanations](https://github.com/rbrooks27/JuniorIS/issues/11) | 0/0/00 | |
-| [Test on actual synthesis problems](https://github.com/rbrooks27/JuniorIS/issues/12) | 0/0/00 | Currently On|
+| [Test on actual synthesis problems](https://github.com/rbrooks27/JuniorIS/issues/12) | 11/1/25|Currently On|
