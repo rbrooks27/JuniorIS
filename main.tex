@@ -6,6 +6,8 @@
 \usepackage{setspace}
 \singlespace
 \usepackage[left=1in,right=1in,top=1in,bottom=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{float}
 
 \title{\textbf{Multistep Synthesis Tool for Organic Chemistry Education}}
 \author{Raelyn Brooks}
@@ -183,7 +185,7 @@ The development environment was maintained using Anaconda to ensure seamless int
 \\
 The pipeline comprises two main operational scripts and a structured data organization system:
 \begin{enumerate}
-    \item \textbf{multistepTemplate:} This core script is responsible for the actual rendering. It parses the SMIRKS notation by first splitting the reaction components using $">"$ and then individual molecules using $"."$. It uses the RDKit library for its robust handling of molecular representations and transformations,specifically for interpreting SMIRKS notation and generating 2D molecular diagrams.
+    \item \textbf{combined123:} This core script is responsible for the actual rendering. It parses the SMIRKS notation by first splitting the reaction components using $">"$ and then individual molecules using $"."$. It uses the RDKit library for its robust handling of molecular representations and transformations,specifically for interpreting SMIRKS notation and generating 2D molecular diagrams.
     \item \textbf{generateFromDataset:} This script manages data access. It reads reaction SMILES and SMIRKS from the curated dataset folder, allowing for adjustable processing limits.
     \item \textbf{Progress Tracking:} It incorporates the tqdm library to provide runtime tracking and progress indication, crucial for managing the large data volume.
 \end{enumerate}
@@ -194,8 +196,45 @@ The ultimate goal of this pipeline is to provide a transparent, visual logic for
 
 
 \section{Results}
+\subsection{Successful Visualization of Elementary Transformations}
+The first objective of this project—creating clear, annotated visualizations of chemical reactions—was achieved through the integration of the RDKit and PIL libraries, as detailed in the \texttt{combined123.py} script.
+The \texttt{parse\_multistep\_smirks} function successfully converts SMIRKS notation (Reactants $\rightarrow$ Reagents $\rightarrow$ Products) into a structured list of steps, while the \texttt{draw\_multistep\_pathway} function rendered the chemical structures and reaction conditions.
+\\
+\indent
+The system demonstrated its ability to visualize a basic, single-step transformation, such as the formation of a cyclic acetal:
+\begin{figure}[H] % Suggests figure placement (here, top, bottom)
+    \centering
+    \includegraphics[scale=0.50]{example2.png}
+    \caption{Visualization of a single-step reaction: Formation of a cyclic acetal from a diol and an aldehyde using an acid catalyst. The reactants, reagents, and product are clearly depicted, demonstrating the system's capability to render individual transformations.}
+    \label{fig:cyclicacetal} % Unique label for referencing
+\end{figure}
+The system's reliance on RDKit also ensured that it could robustly handle molecules of significant size and complexity.
+For instance, the system is capable of parsing and rendering structures like Aspirin CC(=O)Oc1ccccc1C(=O)O, demonstrating that the visualization pipeline scales effectively to handle the intricate molecular topologies commonly encountered in real-world organic synthesis research.
+\subsection{Algorithmic Pathway Generation and Shortest Path Search}
+The second key deliverable was the algorithmic identification of the shortest synthesis pathway.
+This was implemented using the \texttt{reactionGraph} class (\texttt{reactionGraph.py}), which constructs a directed graph where nodes are molecules and edges represent reagent-driven transformations.
+\\
+\indent
+The graph search implementation had to align with the chemical strategy of retrosynthesis, the \texttt{find\_path} method utilized a Breadth-First Search (BFS) algorithm on the reverse graph (where edges point (Products $\rightarrow$ Reactants)).
+This approach implicitly models the problem as finding the minimum number of steps required to reach any available starting material from the target molecule, effectively providing the shortest synthesis route in terms of step count.
+The BFS method guaranteed that the first path found was optimal for a unit-weighted graph, successfully addressing the need to return a concise and chemically reasonable route to the user.
+\\
+\indent
+The system successfully processed the concatenated SMIRKS input (\texttt{CCO > H2SO4 > C=C; C=C > mCPBA > OCC; OCC > HBr > BrCC; BrCC > AgOAc > OCC}), generating a complete five-step synthetic pathway:
+\begin{figure}[H] % Suggests figure placement (here, top, bottom)
+    \centering
+    \includegraphics[scale=0.25]{example3.png}
+    \caption{Visualization of a multi-step synthesis pathway. The system successfully rendered a 5-step reaction sequence, demonstrating its capability to handle complex synthetic routes and provide clear visual logic for each transformation.}
+    \label{fig:5steppathway} % Unique label for referencing
+\end{figure}
 \noindent
-Working on producing results will add to this section soon.
+This visualization, generated by the combined pipeline, verified the system’s capacity to:
+\begin{enumerate}
+    \item Parse and link sequential reactions defined by SMIRKS notation.
+    \item Track intermediate compounds (nodes) across steps.
+    \item Display the complete pathway as a single, interpretable image, thereby transforming the abstract algorithmic search result into a concrete pedagogical tool.
+\end{enumerate}
+The use of an adjacency list structure (\texttt{defaultdict(list)}) in the \texttt{reactionGraph} further ensured that the graph building process from either the large dataset or curated textbook reactions was efficient and scalable, laying the groundwork for future expansions into larger reaction networks and more complex synthesis planning scenarios.
 
 \section{Conclusion}
 \noindent
