@@ -149,6 +149,29 @@ This approach requires robust graph algorithms, such as Dijkstra's algorithm, to
 Furthermore, the challenges of selectivity and functional group compatibility in synthesis are analogous to constraint satisfaction problems (CSPs) in AI~\cite{10.1109/ICTAI.2004.38}.
 Research has shown that decision trees can be effectively integrated with CSPs to manage constraints and optimize search efforts, providing a computational justification for linking chemical constraints to decision logic.
 This focus on creating interpretable rules, through decision tree models directly supports the project's goal of visualizing decision points in the synthetic pathway~\cite{10.24963/ijcai.2023/225}~\cite{10.1016/j.tcs.2025.115344}.
+\subsection{Computational Efficiency and Scalabilty}
+\noindent
+The design prioritized computational efficiency to ensure the system remained viable for processing large datasets and supporting a low-latency interactive user experience.
+\begin{itemize}
+    \item \textbf{Graph Construction:} The Reaction Graph utilized a Python \texttt{defaultdict(list)} to implement the adjacencey list. This structure allows for O(1) average time complexity for adding new reactions (edges) and looking up the neighbors (products) of any given reactant (node). This efficient data structure is crucial for managing the 1.37 million reaction entries without excessive overhead.
+    \item \textbf{Path Finding:} As discussed, the system employs Breadth-First Search (BFS) on the reverse graph for optimal path discovery. In a graph with V molecules (nodes) and E reaction steps (edges), BFS operates in O(V + E) time. This linear time complexity ensures that even as the dataset scales, the search time remains predictable and fast, which is critical for supporting real-time user queries for synthesis pathways.
+    \item \textbf{Molecular Canonicalization:} The use of 's canonical SMILES generation for every molecule ensures that each unique chemical compound maps to a single, consistent graph node. This eliminates redundant nodes and significantly reduces the size of V (the number of vertices), thereby directly improving the overall O(V + E) efficiency of the search algorithm.
+\end{itemize}
+\subsection{Implementation of Chemical Logic in SMIRKS Parsing}
+The SMIRKS parser, implemented in the \texttt{combined123.py}, incorporates specific rules to translate the abstract SMIRKS notation into chemically meaningful steps.
+The core parsing function is responsible for:
+\begin{enumerate}
+    \item \textbf{Component Separation:} Strict adherence to the Reactants $\rightarrow$ Reagents $\rightarrow$ Products convention is enforced using the '$>$' delimiter. The use of the '$ . $' delimiter allows for the identification of multiple molecular components (e.g., co-reactants or byproducts) within a single reaction step. 
+    \item \textbf{Product Identification:} A critical challenge in automated parsing is identifying the single main product of interest, especially when side products are also encoded in the SMIRKS string. The system applies a chemical heuristic: it uses RDKIt to determine the main product by selecting the molecule with the largest number of heavy atoms. This pragmatic rule ensures that complex syntheses, which often produce minor or inorganic byproducts, are correctly simplified into the main transformation necessary for pathway generation.
+    \item \textbf{Molecular Validation:} All parsed strings are immediately passed to RDKit's \texttt{MolFromSmiles} function. This serves as a vital data integrity check, ensuring that only syntactically valid and RDKit-compatible SMILES strings are converted into molecular objects and used to construct the reaction graph, filtering out potentially corrupt data from the large corpus.
+\end{enumerate}
+\subsection{Architecture Layer for Final Visualization Pipeline}
+The final step, visualization, required a two-stage approach combining RDKit's chemical drawing capability with the compositional power of the Python Imaging Library (PIL).
+\begin{enumerate}
+    \item \textbf{RDKit Rendering:} For each molecule identified in the synthesis pathway, RDKit's \texttt{Draw.MolToImage} function generates a standalone, 2D image of a fixed size (250 $*$ 250 pixels). Crucially, the \texttt{rdDepictor.Compute2DCoords} function is explicitly called to ensure consistent and chemically intuitive 2D coordinates are generated for all molecules, standardizing the visual representation.
+    \item \textbf{PIL Composition:} The PIL library then acts as the central compositor. A dynamic canvas size is calculated based on the total number of steps: (Number of Steps $*$ Molecule Width + Number of Steps - 1) $*$ Arrow Width. The canvas is iteratively constructed by placing molecular images (Mol Imgs) at precise X-coordinates.
+    \item \textbf{Annotated Arrows:} Custom drawing logic is used to place the reaction arrow and reagent text between each molecule. The reagent text (extracted from SMIRKS) is centered over the arrow by calculating the text's bounding box (bbox), allowing for accurate X/Y coordinate placement to prevent overlap and ensure the final diagram adheres to the standard conventions of chemical reaction notatio
+\end{enumerate}
 
 \section{Methodology}
 \subsection{Introduction to Methodology}
@@ -192,6 +215,27 @@ The pipeline comprises two main operational scripts and a structured data organi
 The RDKit output (molecular structure images) is then composed using the Python Imaging Library (PIL) to create a unified canvas that displays the reaction scheme in the familiar reaction format.
 All generated images (products, reactants, reactions, and complete multisteps) are stored in organized folders, facilitating rapid retrival for the interactive step-by-step user interface, which is designed with an input structure similar to RMechDB.
 The ultimate goal of this pipeline is to provide a transparent, visual logic for chemical processes, advancing cheminformatics through interpretable visual analytics.
+\subsection{Graph Representation and Unit-Weighted Search}
+The synthesis planning problem was formally modeled as a directed acyclic graph (DAG), although the data processing does not explicitly enforce acyclicity in the raw data loading \texttt{reactionGraph.py}.
+This structure, implemented using Python's \texttt{defaultdict(list)} as an adjacency list, is defined as follows:
+\begin{enumerate}
+    \item \textbf{Nodes:} Canonical SMILES strings representing all stable molecules (reactants, intermediates, products). Canonicalization is enforced by RDKit during parsing to ensure a single, consistent identity for each chemical species, which is crucial for accurate graph traversal and node uniqueness.
+    \item \textbf{Edges:} Represented by the tuple (Product, Reagents), where the reagents are stored as an annotation on the edge.
+\end{enumerate}
+To find the shortest route, the synthesis was reframed as a unit-weighted shortest path problem.
+Since the metric for optimization is the number of synthetic steps (edge count) rather than a complex cost function (like yield or time), all successful transformations are assigned a unit weight of 1.
+Consequently, the optimal algorithm for path finding is the Breadth-First Search (BFS), as implemented in the \texttt{find\_path} method of the \texttt{reactionGraph} class.
+BFS guarantees the discovery of the path with the minimum number of steps first, operating more efficiently than Dijkstra's algorithm in this specific context.
+\subsection{Retrosynthetic Traversal Strategy}
+To implement the retrosynthetic strategy proposed by Corey, the BFS is executed on a reverse graph structure.
+While the primary graph tracks forward synthesis (Reactants $\rightarrow$ Products), a parallel \texttt{reverse\_graph} structure tracks Products $\rightarrow$ Reactants.
+\\ 
+The search begins by enqueuing the target molecule and explores backward using the reverse graph to identify the necessary precursors.
+A deque is used for the BFS queue, and a visited set is maintained to prevent redundant exploration and cycles (where a reaction sequence leads back to a previously visited intermediate).
+The search terminates when an intermediate molecule is found that exists within the predefined set of starting materials.
+\\
+The final pathway is then constructed by reversing the recorded sequence of steps (the path list in the BFS queue).
+This strategy ensures the retrieved output is the desired forward synthesis pathway (Starting Material $\rightarrow$ Target Product) while maintaining the computational efficiency of the backward search approach.
 
 
 
