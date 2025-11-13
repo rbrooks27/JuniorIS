@@ -1,3 +1,5 @@
+
+
 from rdkit import Chem
 from rdkit.Chem import Draw
 from PIL import Image, ImageDraw, ImageFont
@@ -43,8 +45,8 @@ def parse_multistep_smirks(smirks_string, separator=";"):
 # -------------------------------
 def draw_multistep_pathway(steps, output_path):
     """
-    Draws a clean multistep pathway with molecules, arrows, and reagents.
-    `steps`: list of tuples (reactant, reagent, product)
+   #Draws a clean multistep pathway with molecules, arrows, and reagents.
+   #`steps`: list of tuples (reactant, reagent, product)
     """
     if not steps:
         raise ValueError("No steps to draw.")
@@ -107,3 +109,5 @@ if __name__ == "__main__":
     steps = parse_multistep_smirks(smirks_example)
     output_file = os.path.join("data", "multi_step_pathway.png")
     draw_multistep_pathway(steps, output_file)
+
+
