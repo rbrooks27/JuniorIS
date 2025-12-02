@@ -1,5 +1,3 @@
-
-
 from rdkit import Chem
 from rdkit.Chem import Draw
 from PIL import Image, ImageDraw, ImageFont
@@ -13,21 +11,48 @@ def parse_multistep_smirks(smirks_string, separator=";"):
     Parse a string containing multiple reactions separated by `separator` (default ';' or '.').
     Returns a list of (reactant, reagent, product) tuples.
     """
+    # Clean up input
+    smirks_string = smirks_string.strip()
+    
     # Split the string into individual reactions
     # Allow both ';' or '.' as separators
-    raw_reactions = [s.strip() for s in smirks_string.replace(".", separator).split(separator) if ">" in s]
+    # raw_reactions = [s.strip() for s in smirks_string.replace(".", separator).split(separator) if ">" in s]
+    
+    raw_reactions = [s.strip() for s in smirks_string.split(separator) if ">" in s]
     
     all_steps = []
 
     for rxn_line in raw_reactions:
         parts = rxn_line.split(">")
         if len(parts) != 3:
-            raise ValueError(f"Invalid SMIRKS format: {rxn_line}")
+            continue # skip malformed
+            # raise ValueError(f"Invalid SMIRKS format: {rxn_line}")
+        reactant_block, reagent_block, product_block = parts
 
+        # Old reactants, reagents, products parsing
+        """
         reactants = [Chem.MolToSmiles(Chem.MolFromSmiles(s), canonical=True) for s in parts[0].split(".") if s]
         reagents = [s.strip() for s in parts[1].split(".") if s]
         products = [Chem.MolToSmiles(Chem.MolFromSmiles(s), canonical=True) for s in parts[2].split(".") if s]
+        """
+        # Reactants: split by '.'
+        reactants = [s for s in reactant_block.split(".") if s]
+        
+        # Reagents: keep as a single string (commas within reagents allowed)
+        # reagents = [s for s in reagent_block.split(".") if s]
+        reagents = ",".join([s for s in reagent_block.split(".") if s])
+        
+        products = []
+        for s in product_block.split("."):
+            if not s:
+                continue
+            mol = Chem.MolFromSmiles(s)
+            if mol:
+                products.append(Chem.MolToSmiles(mol, canonical=True))
+            else:
+                products.append(s)  # keep original if parsing fails
 
+        '''
         # Pick main product (largest heavy atom count)
         def main_product(smiles_list):
             return max(smiles_list, key=lambda s: Chem.MolFromSmiles(s).GetNumHeavyAtoms())
@@ -37,6 +62,21 @@ def parse_multistep_smirks(smirks_string, separator=";"):
         # Add steps for each reactant
         for react in reactants:
             all_steps.append((react, ", ".join(reagents), main_prod))
+        '''
+        
+        def product_size(smiles):
+            mol = Chem.MolFromSmiles(smiles)
+            return mol.GetNumHeavyAtoms() if mol else -1
+
+        main_prod = max(products, key=product_size)
+
+        # Add one step per reactant
+        for react in reactants:
+            mol = Chem.MolFromSmiles(react)
+            if mol:
+                react = Chem.MolToSmiles(mol, canonical=True)
+            all_steps.append((react, reagents, main_prod))
+            # all_steps.append((react, ", ".join(reagents), main_prod))
 
     return all_steps
 
@@ -106,8 +146,9 @@ def draw_multistep_pathway(steps, output_path):
 # -------------------------------
 if __name__ == "__main__":
     smirks_example = "CCO>H2SO4>C=C;C=C>Br2>CCBr;CCBr>NH3>CCN"
+    # smirks_example = "C1=CC=CC=C1.O=C(O)CCl>[Cu]Br2.CN(C)C.CS(=O)(=O)[O-].[K+]>C1=CC=CC=C1C(=O)NC"
     steps = parse_multistep_smirks(smirks_example)
-    output_file = os.path.join("data", "multi_step_pathway.png")
+    output_file = os.path.join("data/reactions", "Multi_step_pathway.png")
     draw_multistep_pathway(steps, output_file)
 
 
