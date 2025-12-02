@@ -20,8 +20,8 @@
 \indent
 Organic synthesis—the design of reaction sequences to build complex molecules from simpler precursors—remains one of the most intellectually demanding areas of chemistry.
 Unlike single-step reactions that can be memorized and applied in isolation, multistep synthesis requires strategic planning, backward reasoning, and the careful coordination of many interacting chemical transformations.
-For students, this often feels like solving a "black box" puzzle: they understand individual reactions but struggle to combine them into coherent pathways.
-The widespread difficulty in mastering this skill is underscored by national failure rates for organic chemistry courses, which frequently exceed 50 percent.~\cite{mooring2016flipped}
+For students, this often feels like solving a "black box" puzzle; they understand individual reactions but struggle to combine them into coherent pathways.
+The widespread difficulty in mastering this skill is underscored by national failure rates for organic chemistry courses, which frequently exceed 50 percent~\cite{mooring2016flipped}.
 \\
 \indent
 In both research and education, the traditional static depiction of reactions in textbooks fails to reflect the underlying algorithmic logic of multistep synthesis.
@@ -99,7 +99,7 @@ For computer scientists, this framing highlights why cheminformatics libraries l
 \subsection{Reaction Representation and SMIRKS Formalism}
 \indent
 The foundational step in computational reaction modeling is the translation of chemical transformations into a symbolic language interpretable by algorithms.
-The SMIRKS format, derived from SMILES, provides a flexible mechanism to encode both specific reactions and generalized transformation rules.
+The SMIRKS (superset of SMILES) format, derived from SMILES (Simplified Molecular Input Line Entry System), provides a flexible mechanism to encode both specific reactions and generalized transformation rules.
 Literature on chemical data representation emphasizes that these formats enable reaction pattern recognition, rule-based synthesis prediction, and large-scale database integration.
 Works in this domain highlight that robust SMIRKS parsing supports not only mechanistic modeling but also serves as a data layer for visualization systems and generative synthesis algorithms~\cite{10.1002/ail2.91}.
 \begin{figure}[H] % Suggests figure placement (here, top, bottom)
@@ -109,9 +109,6 @@ Works in this domain highlight that robust SMIRKS parsing supports not only mech
     \label{fig:SMILEStomolecule} % Unique label for referencing
 \end{figure}
 These examples illustrates how SMILES strings are converted into 2D molecular structures using RDKit, demonstrating the practical application of symbolic chemical notation in computational chemistry.
-\\
-\indent
-Works in this domain highlight that robust SMIRKS parsing supports not only mechanistic modeling but also serves as a data layer for visualization systems and generative synthesis algorithms.
 The annotated literature identifies several efforts to standardize chemical notation and link structural encoding with reaction prediction models, a crucial link to the project’s educational synthesis visualization goals.
 \subsection{RDKit and Cheminformatics Frameworks}
 \indent
@@ -169,7 +166,7 @@ This section details the data architecture, the graph-based framework for synthe
 \subsection{Data Acquisition and Structural Formatting}
 The foundation of the system is a comprehensive dataset of chemical transformations.
 The primary data source is a large SMILES dataset compiled by Rik van der Lingen, which encompasses 1.37 million reaction SMILES entries~\cite{vanderlingen2025reaction}.
-These entries, which include reactants, reagents, solvents, and products, were sourced predominantly from United States Patent and Trademark Office USPTO patent literature spanning from 1976 to 2024, with an additional 2.5 percent from academic literature.
+These entries, which include reactants, reagents, solvents, and products, were sourced predominantly from the USPTO (United States Patent and Trademark Office) patent literature spanning from 1976 to 2024, with an additional 2.5 percent from academic literature.
 This extensive dataset was generated through custom parsing and conversion from an existing USPTO dataset, employing OSCAR for semantic parsing and ChatGPT LLM-based extraction for data extraction.
 Molecular entity identification was achieved using OPSIN and a custom synonym list.
 All SMILES strings were verified to be RDKit-safe, and duplicates were removed to ensure data integrity.
@@ -271,7 +268,7 @@ The use of an adjacency list structure (\texttt{defaultdict(list)}) in the \text
 
 \section{Conclusion}
 \noindent
-This project successfully developed and implemented an interactive visualization pipeline designed to demystify the algorithmic complexity of multistep organic synthesis for students and researchers.
+This project successfully develops and implements an interactive visualization pipeline designed to demystify the algorithmic complexity of multistep organic synthesis for students and researchers.
 By bridging the gap between chemical transformations and computational logic, the tool positioned synthesis not merely as a memorization task, but as a tractable, rule-driven problem.
 \\
 \indent
@@ -289,7 +286,7 @@ The developed Python pipeline, utilizing RDKit and PIL, successfully parsed SMIR
 This automated visualization capability provided a critical instructional aid, moving beyond static textbook depictions to offer a dynamic, traceable record of the synthetic logic.
 \\
 \indent
-In conclusion, this work demonstrated the feasibility and power of applying computational methodologies to organic chemistry education.
+In conclusion, this work demonstrates the feasibility and power of applying computational methodologies to organic chemistry education.
 By providing an explicit visual and algorithmic structure to multistep synthesis, the project laid the groundwork for future tools that could incorporate decision-tree logic and advanced AI models for retrosynthesis prediction, ultimately enhancing the teaching and practice of chemical synthesis.
 \bibliographystyle{acm}
 \bibliography{bibliography.bib}
