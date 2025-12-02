@@ -36,7 +36,17 @@ def parse_multistep_smirks(smirks_string, separator=";"):
         products = [Chem.MolToSmiles(Chem.MolFromSmiles(s), canonical=True) for s in parts[2].split(".") if s]
         """
         # Reactants: split by '.'
-        reactants = [s for s in reactant_block.split(".") if s]
+        # reactants = [s for s in reactant_block.split(".") if s]
+        reactants = []
+        for s in reactant_block.split("."):
+            if not s:
+                continue
+            mol = Chem.MolFromSmiles(s)
+            if mol:
+                reactants.append(Chem.MolToSmiles(mol, canonical=True))
+            else:
+                reactants.append(s)
+        
         
         # Reagents: keep as a single string (commas within reagents allowed)
         # reagents = [s for s in reagent_block.split(".") if s]

@@ -1,9 +1,12 @@
-
+# just general imports needed
 import os
 from tqdm import tqdm
-from combined123 import parse_multistep_smirks, draw_multistep_pathway  #  unified script
-from reactionGraph import ReactionGraph # this for graphing structures
 from rdkit import Chem
+
+# Functions from combined123.py and reactionGraph.py which are used for graph building and pathway drawing
+from combined123 import parse_multistep_smirks, draw_multistep_pathway  #  unified script
+from reactionGraph import ReactionGraph
+
 
 """
 # Overview:
@@ -11,23 +14,35 @@ from rdkit import Chem
 # and generates visual representations of the reaction pathways using the unified parser/drawing functions.
 """
 
-# -------------------------------
-# Dataset and output settings
-# -------------------------------
-dataset_file = "dataset/textbookReactions.txt"  # smaller sample for testing
+# --------------------------------------------
+# Helpers
+# --------------------------------------------
+def canon(smiles: str) -> str:
+    """Convert SMILES to canonical form."""
+    mol = Chem.MolFromSmiles(smiles)
+    if mol:
+        return Chem.MolToSmiles(mol, canonical=True)
+    return smiles
+
+
+# --------------------------------------------
+# Dataset + Output
+# --------------------------------------------
+dataset_file = "dataset/textbookReactions.txt"   # small dataset for testing
 # dataset_file = "dataset/reactionSmilesFigShare2024.txt"  # full dataset
 
-output_dir = "data/reactions"  # output directory for pathway images
+output_dir = "data/reactions"
 os.makedirs(output_dir, exist_ok=True)
 
-MAX_LINES = 20  # set to None to process all lines
+MAX_LINES = 20  # set None to process entire file
 
-# Initialization of Reaction Graph
+# Initialize Reaction Graph
 G = ReactionGraph()
 
-# -------------------------------
-# Process each SMIRKS line
-# -------------------------------
+
+# --------------------------------------------
+# Build graph + generate images
+# --------------------------------------------
 with open(dataset_file, "r") as f:
     for i, line in enumerate(tqdm(f, desc="Generating pathways and building graph")):
         if MAX_LINES and i >= MAX_LINES:
@@ -36,22 +51,20 @@ with open(dataset_file, "r") as f:
         line = line.strip()
         if not line or ">" not in line:
             continue
-        
-        # Process the SMIRKS line and generate pathway image
+
         try:
-            # Parse the SMIRKS into steps
+            # Parse the SMIRKS into individual (reactant, reagent, product) steps
             steps = parse_multistep_smirks(line)
-            # Skip if parsing returned nothing
+
             if not steps:
-                print(f"No valid steps found at line {i}")
+                print(f"No valid steps at line {i}: {line}")
                 continue
-            
-            G.load_steps(steps)  # Load steps into the reaction graph
 
-            # Generate output path
+            # Store steps in the reaction graph
+            G.load_steps(steps)
+
+            # Output pathway drawing
             output_path = os.path.join(output_dir, f"reaction_{i}.png")
-
-            # Draw the multistep pathway
             draw_multistep_pathway(steps, output_path)
 
         except Exception as e:
@@ -61,22 +74,37 @@ with open(dataset_file, "r") as f:
 
 print("Done generating individual reaction pathways.")
 
-# -------------------------------
-# Find synthesis path in reaction graph
-# -------------------------------
 
-starting_materials = {"CCO", "CC=O", "C=C"}  # set of starting molecules
-target = "OCC"  # target molecule
+# --------------------------------------------
+# Retrosynthesis Search
+# --------------------------------------------
+# Canonicalize all starting materials
+# starting_materials_raw = ["CCO"]
+starting_materials_raw = ["CC=O"]
+starting_materials = {canon(s) for s in starting_materials_raw}
+
+# Canonicalize target!
+# target_raw = "COCC"
+target_raw = "CC(=O)O"
+target = canon(target_raw)
+
+print(f"\nSearching for path to target: {target_raw} (canonical: {target})")
+
 path = G.find_path(starting_materials, target)
 
+
+# --------------------------------------------
+# Output Retrosynthesis Path
+# --------------------------------------------
 if path:
-    print("Synthesis path found:")
+    print("\nSynthesis path found:\n")
     for react, reagents, prod in path:
         print(f"{react} --[{reagents}]--> {prod}")
 
     final_path_img = os.path.join(output_dir, "synthesis_pathway.png")
     draw_multistep_pathway(path, final_path_img)
-    print(f"Synthesis pathway image saved as {final_path_img}")
+    print(f"\nSynthesis pathway image saved as:\n{final_path_img}\n")
+
 else:
-    print("No synthesis path found from starting materials to target.")
+    print("\nNo synthesis path found from starting materials to target.\n")
 
