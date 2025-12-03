@@ -9,3 +9,4 @@ CC=O.S>[H+]>C(S)S
 CC=O.CC=O>[OH-]>C(CO)C=O
 CCO>H2SO4>C=C;C=C>mCPBA>OCC;OCC>HBr>BrCC;BrCC>AgOAc>COCC
 CC=O.CP(C1CCCCC1)=C>[H+]>C=C
+C1(=CC=C(C=C1C[P](=O)(OCC)OCC)[S](F)(F)(F)(F)F)[N+](=O)[O-].C1(=CC=CC=C1)C=O>N(C)(C)C=O.CC(C)(C)[O-].[K+]>C1(=CC=C(C=C1C=CC2=CC=CC=C2)[S](F)(F)(F)(F)F)[N+](=O)[O-]

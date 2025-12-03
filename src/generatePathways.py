@@ -80,12 +80,14 @@ print("Done generating individual reaction pathways.")
 # --------------------------------------------
 # Canonicalize all starting materials
 # starting_materials_raw = ["CCO"]
-starting_materials_raw = ["CC=O"]
+# starting_materials_raw = ["CC=O"]
+starting_materials_raw = ["C1(=CC=C(C=C1C[P](=O)(OCC)OCC)[S](F)(F)(F)(F)F)[N+](=O)[O-]", "C1(=CC=CC=C1)C=O>N(C)(C)C=O.CC(C)(C)[O-]", "[K+]"]
 starting_materials = {canon(s) for s in starting_materials_raw}
 
 # Canonicalize target!
 # target_raw = "COCC"
-target_raw = "CC(=O)O"
+# target_raw = "CC(=O)O"
+target_raw = "C1(=CC=C(C=C1C=CC2=CC=CC=C2)[S](F)(F)(F)(F)F)[N+](=O)[O-]"
 target = canon(target_raw)
 
 print(f"\nSearching for path to target: {target_raw} (canonical: {target})")
