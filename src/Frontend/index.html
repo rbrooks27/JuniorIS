@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>OrgoNizer — Multi-step Synthesizer</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="top-left">
+      <span class="site-url">www.OrgoNizer.com/homepage</span>
+    </div>
+    <nav class="nav">
+      <a class="nav-item active" href="#home">Home</a>
+      <a class="nav-item" href="#about">About</a>
+      <a class="nav-item" href="#synth">Multi-step Synthesizer</a>
+    </nav>
+  </header>
+
+  <main class="container" id="home">
+    <section class="hero">
+      <h1>Welcome Organic Chemists to the OrgoNizer</h1>
+      <p class="subtitle">Multi-step Entry Synthesizer — explore pathways step-by-step</p>
+    </section>
+
+    <section class="workspace">
+      <div class="panel reactants">
+        <div class="panel-header">Reactants</div>
+        <div class="panel-body">
+          <div class="molecule-sample">
+            <img src="" alt="reactant-smiles" id="reactant-img" />
+          </div>
+        </div>
+      </div>
+
+      <div class="panel center-rail">
+        <div class="arrow-dot" aria-hidden="true"></div>
+        <div class="reagents-box">
+          <label>Reagents / Conditions</label>
+          <input id="reagents" placeholder="e.g., H+, heat, base" />
+        </div>
+      </div>
+
+      <div class="panel products">
+        <div class="panel-header">Products</div>
+        <div class="panel-body">
+          <div class="molecule-sample">
+            <img src="" alt="product-smiles" id="product-img" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lower-row">
+      <div class="panel full-mechanism">
+        <div class="panel-header">Full Multi-step Synthesis </div>
+        <div class="panel-body mechanism-body" id="mechanism">
+          <!-- placeholder for mechanism diagram or text -->
+          <p>Synthesis preview and step-by-step reaction arrows appear here.</p>
+        </div>
+      </div>
+
+      <aside class="panel side-controls">
+        <div class="panel small">
+          <div class="panel-header">Step-By-Step Mode</div>
+          <div class="panel-body">
+            <label for="target">Target (SMILES)</label>
+            <input id="target" placeholder="Enter target SMILES" />
+            <label for="starting">Starting Materials (comma)</label>
+            <input id="starting" placeholder="SMILES1, SMILES2" />
+            <button id="runBtn" class="primary">Generate Pathway</button>
+          </div>
+        </div>
+
+        <div class="panel small next-box">
+          <div class="panel-header">What's Next</div>
+          <div class="panel-body">
+            <button id="explainBtn" class="secondary">Explain Step</button>
+            <div id="explainText" class="explain-text">Select a pathway result to explain a single step.</div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <footer class="page-footer">
+      <div class="left">© 2025 Raelyn Brooks. All rights reserved.</div>
+      <div class="right">Built for demo — static frontend (HTML/CSS/JS)</div>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
