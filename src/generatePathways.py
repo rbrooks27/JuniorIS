@@ -28,13 +28,13 @@ def canon(smiles: str) -> str:
 # --------------------------------------------
 # Dataset + Output
 # --------------------------------------------
-dataset_file = "dataset/textbookReactions.txt"   # small dataset for testing
-# dataset_file = "dataset/reactionSmilesFigShare2024.txt"  # full dataset
+# dataset_file = "dataset/textbookReactions.txt"   # small dataset for testing
+dataset_file = "dataset/reactionSmilesFigShare2024.txt"  # full dataset
 
 output_dir = "data/reactions"
 os.makedirs(output_dir, exist_ok=True)
 
-MAX_LINES = 20  # set None to process entire file
+MAX_LINES = 50  # set None to process entire file
 
 # Initialize Reaction Graph
 G = ReactionGraph()
@@ -81,14 +81,17 @@ print("Done generating individual reaction pathways.")
 # Canonicalize all starting materials
 # starting_materials_raw = ["CCO"]
 # starting_materials_raw = ["CC=O"]
-starting_materials_raw = ["C1(=CC=C(C=C1C[P](=O)(OCC)OCC)[S](F)(F)(F)(F)F)[N+](=O)[O-]", "C1(=CC=CC=C1)C=O>N(C)(C)C=O.CC(C)(C)[O-]", "[K+]"]
+# starting_materials_raw = ["C1(=CC=C(C=C1C[P](=O)(OCC)OCC)[S](F)(F)(F)(F)F)[N+](=O)[O-]", "C1(=CC=CC=C1)C=O>N(C)(C)C=O.CC(C)(C)[O-]", "[K+]"]
+starting_materials_raw = ["CC(/C=C/C(=O)OC(C)(C)C)C", "C(C1=CC=CC=C1)N[C@@H](C1=CC=CC=C1)C>C1CCCO1","C(CCC)[Li]"]
 starting_materials = {canon(s) for s in starting_materials_raw}
 
 # Canonicalize target!
 # target_raw = "COCC"
 # target_raw = "CC(=O)O"
-target_raw = "C1(=CC=C(C=C1C=CC2=CC=CC=C2)[S](F)(F)(F)(F)F)[N+](=O)[O-]"
+# target_raw = "C1(=CC=C(C=C1C=CC2=CC=CC=C2)[S](F)(F)(F)(F)F)[N+](=O)[O-]"
+target_raw = "C(C1=CC=CC=C1)N([C@@H](C1=CC=CC=C1)C)[C@@H](CC(=O)OC(C)(C)C)C(C)C"
 target = canon(target_raw)
+
 
 print(f"\nSearching for path to target: {target_raw} (canonical: {target})")
 
