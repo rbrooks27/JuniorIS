@@ -32,14 +32,14 @@ While professional chemistry tools exist—such as ChemDraw or Reaxys--these pla
 ### Configure inputs inside generatePathways.py
 
 #### Modification of Dataset File
-Change the dataset_file variable
+Change the ```dataset_file``` variable
 
 #### Max Number of Dataset Lines
-Change the MAX_LINES variable
+Change the ```MAX_LINES``` variable
 
 ### Target + Starting Materials
-    target_raw = " "  # target molecule (SMILES)
-    starting_materials_raw = ["", ""]  # list of starting materials
+    ``` target_raw = " " ```  # target molecule (SMILES)
+    ```starting_materials_raw = ["", ""]```  # list of starting materials
 
 ### Run the Pathway Generator
 ```python generatePathways.py```
