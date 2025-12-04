@@ -38,8 +38,10 @@ Change the ```dataset_file``` variable
 Change the ```MAX_LINES``` variable
 
 ### Target + Starting Materials
-    ``` target_raw = " " ```  # target molecule (SMILES)
-    ```starting_materials_raw = ["", ""]```  # list of starting materials
+    ``` bash
+    target_raw = " "   # target molecule (SMILES)
+    starting_materials_raw = ["", ""]  # list of starting materials
+    ```
 
 ### Run the Pathway Generator
 ```python generatePathways.py```
