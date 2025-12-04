@@ -46,6 +46,7 @@ Change the MAX_LINES variable
 
 
 ## Repository Structure
+```bash
 ├── README.md
 ├── main.pdf                 # Full academic write-up (Junior IS)
 ├── src/                     # Source code for the OrgoNizer tool
@@ -60,14 +61,13 @@ Change the MAX_LINES variable
 │   │       ├── textbookReactions.txt            # Personally curated textbook reactions
 │   
 └── ...
-    
+```
 
 
 ## Feature Calendar
 
 | **Issue** | **Due date** | |
-| --------- | ------------ | -- |
-| []() | 0/0/00 | |
+| --------- | ------------ | -- ||
 | [Example issue description with link](https://github.com/hmm34/example-annotated-bibliography/issues/1) | 9/1/25 |Completed|
 | [Find Dataset for Organic Molecule based on Attributes needed](https://github.com/rbrooks27/JuniorIS/issues/1) | 9/19/25 |Completed|
 | [Building database to store all molecules and reactions (if needed)](https://github.com/hmm34/example-annotated-bibliography/issues/1) | 9/19/25 |Was Not Needed|
