@@ -38,10 +38,8 @@ Change the ```dataset_file``` variable
 Change the ```MAX_LINES``` variable
 
 ### Target + Starting Materials
-    ``` bash
     target_raw = " "   # target molecule (SMILES)
     starting_materials_raw = ["", ""]  # list of starting materials
-    ```
 
 ### Run the Pathway Generator
 ```python generatePathways.py```
@@ -64,22 +62,3 @@ Change the ```MAX_LINES``` variable
 │   
 └── ...
 ```
-
-
-## Feature Calendar
-
-| **Issue** | **Due date** | |
-| --------- | ------------ | -- ||
-| [Example issue description with link](https://github.com/hmm34/example-annotated-bibliography/issues/1) | 9/1/25 |Completed|
-| [Find Dataset for Organic Molecule based on Attributes needed](https://github.com/rbrooks27/JuniorIS/issues/1) | 9/19/25 |Completed|
-| [Building database to store all molecules and reactions (if needed)](https://github.com/hmm34/example-annotated-bibliography/issues/1) | 9/19/25 |Was Not Needed|
-| [Develop Decision Tree Logic](https://github.com/rbrooks27/JuniorIS/issues/3) | 11/1/25 |Completed|
-| [Input molecule by name or drawing](https://github.com/rbrooks27/JuniorIS/issues/4) | 0/0/00 |Completed|
-| [Confirm and display input molecules](https://github.com/rbrooks27/JuniorIS/issues/5) | 0/0/00 |Completed|
-| [Search function for molecules](https://github.com/rbrooks27/JuniorIS/issues/6) | 0/0/00 |Completed|
-| [Generate single-step transformations](https://github.com/rbrooks27/JuniorIS/issues/7) | 0/0/00 |Completed|
-| [Constraint enforcement on pathways.](https://github.com/rbrooks27/JuniorIS/issues/8) | 11/1/25|Completed|
-| [Generate multistep synthesis pathways](https://github.com/rbrooks27/JuniorIS/issues/9) | 0/0/00 |Completed|
-| [User interface for interaction](https://github.com/rbrooks27/JuniorIS/issues/10) | 0/0/00 |Completed|
-| [Step-by-step walkthrough mode with explanations](https://github.com/rbrooks27/JuniorIS/issues/11) | 0/0/00 |Completed|
-| [Test on actual synthesis problems](https://github.com/rbrooks27/JuniorIS/issues/12) | 11/1/25|Completed|
